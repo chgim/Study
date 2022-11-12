@@ -6,7 +6,7 @@ import MyHeader from './MyHeader';
 
 
 function App() {
-   let name="반가워요";
+   let name="반갑습니다 여러분";
    const number=5;
    const style={
     App:{backgroundColor:"gold"}
