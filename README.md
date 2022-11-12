@@ -33,5 +33,66 @@
 - 브라우저에 실제로 보여지는 DOM 이 아니라 그냥 메모리에 가상으로 존재하는 DOM 으로서 그냥 JavaScript 객체.  
 ## JSX
 - 리액트로 프로젝트를 개발시에 사용. 공식적 자바스크립트 문법은 아님.
+- 자바스크립트 확장 문법
 - DOM 요소 렌더링
-- 코드를 {}로 감싸 JSX 안에 자바스크립트 표현식 사용 가능
+
+
+### 문법
+#### 컴포넌트에 여러 요소가 있다면 반드시 부모 요소 하나로 감싸야 한다.
+#### 코드를 {}로 감싸 JSX 안에 자바스크립트 표현식 사용 가능
+#### if문 대신 조건부 연산자
+- JSX 내부의 자바스크립트 표현식에서는 if문을 사용하지 않고 삼항연산자 사용
+```js run
+function App(){
+    const name='리액트';
+    return(
+        <div>
+        {name==='리액트'?(
+            <h1>리액트입니다.</h1>
+        ):(
+            <h2>리액트가 아닙니다.</h2>
+        )}
+        </div>
+        );
+        }
+```
+#### AND 연산자(&&)를 사용한 조건부 렌더링
+```js run
+function App(){
+    const name='리액트';
+    return(
+        <div>
+        {name==='리액트'&&<h1>리액트입니다.</h1>}
+        </div>
+        );
+        }
+```
+&&연산자로 조건부 렌더링을 할 수 있는 이유는 리액트에서 false를 렌더링 할 때에는 null과 마찬가지로 아무것도 나타나지 않기 때문.
+예외적으로 falsy한 값인 0은 화면에 나타남.
+#### undefined를 렌더링 하지 않기
+함수에서 undefined만 반환하여 렌더링 x
+```js run
+function App(){
+    const name=undefined;
+    return name;
+        }//오류
+```
+#### OR 연산자(||)
+```js run
+function App(){
+    const name=undefined;
+    return name||'값이 undefined입니다.';
+        }
+```
+#### 인라인 스타일링
+리액트에서 DOM 요소에 스타일을 적용할 때는 문자열 형태로 넣는 것이 아니라 객체 형태로 넣어준다.
+background-color -> backgroundColor(카멜 표기법)
+#### class 대신 className
+일반 html에서 css 사용 시 <div class="ds"></div>와 같이 class라는 속성 설정.
+JSX에서는 class가 아닌 className으로 설정
+```js run
+function App(){
+    const name=리액트;
+    return <div className="react">{name}</div>;
+        }
+```
