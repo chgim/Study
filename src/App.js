@@ -1,46 +1,110 @@
-import React from 'react';
-import './App.css';
-import EventPracticeDefault from './ex2/EventPracticeDefault';
-// import Book from './ex1/Book';
-// import Library from './ex1/Library';
-// import LandingPage from './ex2/LandingPage';
-// import Counter from './ex2/Counter';
-// import Counter2 from './ex2/Counter2';
-// import Hello from './ex2/Hello';
-// import Say from './ex2/Say';
-// import MyFooter from './MyFooter';
-// import './MyHeader';
-// import MyHeader from './MyHeader';
-// import Say2 from './ex2/Say2';
+import { useEffect, useRef, useState } from "react";
+import "./App.css";
+import DiaryEditor from "./DiaryEditor";
+import DiaryList from "./DiaryList";
 
+const App = () => {
+  const [data, setData] = useState([]);
+  const dataId = useRef(0);
+
+  const getData = async () => {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/comments"
+    ).then((res) => res.json());
+
+    const initData = res.slice(0, 20).map((it) => {
+      return {
+        author: it.email,
+        content: it.body,
+        emotion: Math.floor(Math.random() * 5) + 1,
+        created_date: new Date().getTime() + 1,
+        id: dataId.current++
+      };
+    });
+
+    setData(initData);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getData();
+    }, 1500);
+  }, []);
+
+  const onCreate = (author, content, emotion) => {
+    const created_date = new Date().getTime();
+    const newItem = {
+      author,
+      content,
+      emotion,
+      created_date,
+      id: dataId.current
+    };
+    dataId.current += 1;
+    setData([newItem, ...data]);
+  };
+
+  const onRemove = (targetId) => {
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    setData(newDiaryList);
+  };
+
+  const onEdit = (targetId, newContent) => {
+    setData(
+      data.map((it) =>
+        it.id === targetId ? { ...it, content: newContent } : it
+      )
+    );
+  };
+
+  return (
+    <div className="App">
+      <DiaryEditor onCreate={onCreate} />
+      <DiaryList onEdit={onEdit} onRemove={onRemove} diaryList={data} />
+    </div>
+  );
+};
+export default App;
+
+
+// // import logo from './logo.svg';
+// import './App.css';
+// import DiaryEditor from './DiaryEditor';
+// import DiaryList from './DiaryList';
+
+
+// const dummyList=[
+//   {
+//     id:1,
+//     author:"김찬호",
+//     content:"하이1",
+//     emotion:5,
+//     created_date:new Date().getTime(),
+//   },
+//   {
+//     id:2,
+//     author:"김찬호2",
+//     content:"하이2",
+//     emotion:3,
+//     created_date:new Date().getTime(),
+//   },
+//   {
+//     id:3,
+//     author:"김찬호3",
+//     content:"하이3",
+//     emotion:5,
+//     created_date:new Date().getTime(),
+//   },
+// ]
 // function App() {
-//   //  let name="반갑습니다 여러분";
-//   //  const number=5;
-//   //  const style={
-//   //   App:{backgroundColor:"gold"}
-//   //  };
-//   // return (
-//   //   <div className="App" style={style.App}>
-//   //     <MyHeader/>
-//   //     <header className="App-header">
-//   //       <h2>안녕 리액트 {name}</h2>
-//   //       {number}는: {number %2===0?"짝수":"홀수"}
-//   //     </header>
-//   //     <MyFooter/>
-//   //   </div>
-//   // );
-//   return(
-//     <div>
-//       {/* <Counter />
-//       <Counter2 a={1} initialValue={5} /> */
-//       // <Hello name="react" color="red" />
-//       }
-//           </div>
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//       <DiaryEditor/>
+//       <DiaryList diaryList={dummyList}/>
+//       </header>
+//     </div>
 //   );
 // }
 
-const App=()=>{
-  return < EventPracticeDefault />;
-};
-
-export default App;
+// export default App;
