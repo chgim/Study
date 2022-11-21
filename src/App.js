@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import EventPracticeDefault from './ex2/EventPracticeDefault';
+import Calculator from './ex3/Calculator';
 // import Book from './ex1/Book';
 // import Library from './ex1/Library';
 // import LandingPage from './ex2/LandingPage';
@@ -40,7 +41,7 @@ import EventPracticeDefault from './ex2/EventPracticeDefault';
 // }
 
 const App=()=>{
-  return < EventPracticeDefault />;
+  return < Calculator />;
 };
 
 export default App;
