@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useReducer, useRef, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import MyHeader from "./components/MyHeader";
@@ -32,6 +32,7 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+  localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
 
@@ -51,6 +52,24 @@ const dummyData = [
 
 function App() {
 
+
+  useEffect(()=>{
+    const localData = localStorage.getItem("diary");
+    if(localData) {
+      const diaryList = JSON.parse(localData).sort(
+        (a,b) => parseInt(b.id) - parseInt(a.id)
+      );
+      dataId.current = parseInt(diaryList[0].id) + 1
+
+	 // 초기값을 설정해주는 액션
+      dispatch({type:"INIT", data:diaryList});
+    }
+  }, []);
+  const dataId = useRef(6);
+  
+  
+  // key 초기값 변경
+  
    // data의 기본 state는 []에서 dummyData 받기
   
   
@@ -62,7 +81,7 @@ function App() {
   // const [data, dispatch] = useReducer(reducer, []);
   console.log(new Date().getTime());
   // 일기 id로 사용
-  const dataId = useRef(0);
+  
 
   // CREATE
   const onCreate = (date, content, emotion) => {
@@ -104,7 +123,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
-              <Route path="/edit" element={<Edit />} />
+              <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />
             </Routes>
           </div>

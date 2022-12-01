@@ -1,14 +1,12 @@
 // hooks
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "./../App";
 
-// components
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
 import EmotionItem from "./EmotionItem";
 
-// EmotionItem의 img 불러오기 (1~5개의 감정 배열)
 const env = process.env;
 env.PUBLIC_URL = env.PUBLIC_URL || "";
 
@@ -40,49 +38,71 @@ const emotionList = [
   },
 ]
 
-// 날짜 표시는 YYYY-MM-DD 형태의 9개의 문자열 반환(toISOString)
-// date 객체를 전달받음
 const getStringDate = (date) => {
   return date.toISOString().slice(0, 10);
 };
 
-const DiaryEditor = () => {
-  const [emotion, setEmotion] = useState(3); // 그럭저럭 감정(3) 기본값
-  const [date, setDate] = useState(getStringDate(new Date())); // new Date 오늘 날짜 초기값
-  const [content, setContent] = useState(); // textarea 상태 변화 
-  const contentRef = useRef(); // textarea 참조
+// DiaryEditor 함수에 isEdit, originData prop 넣어주기
 
-// EmotionItem 클릭 시 해당 state로 변화
+const DiaryEditor = ({isEdit, originData}) => {
+  const [emotion, setEmotion] = useState(3); // 3번 default
+  const [date, setDate] = useState(getStringDate(new Date()));
+  const [content, setContent] = useState();
+  const contentRef = useRef();
+
   const handleClickEmote = (emotion) => {
     setEmotion(emotion);
   };
 
-// 작성완료 시 App.js에 전달
-  const {onCreate} = useContext(DiaryDispatchContext);
-  
-// 아무 것도 작성하지 않았다면(1글자 미만) textarea 참조받아 focusing
+  // 작성완료에 onEdit 공급
+  const {onCreate, onEdit, onRemove} = useContext(DiaryDispatchContext);
   const handleSubmit = () => {
     if(content.length < 1) {
       contentRef.current.focus();
       return;
     }
+  
+    // 작성완료 confirm 조건 추가 (새 일기 작성/수정 시)
+    // 조건에 따라 수정/작성 완료 후 alert창으로 묻기
+    if(window.confirm(isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?")){
+      // 새 일기 작성인 경우(수정이 아닌 경우)
+      if(!isEdit) {
+        onCreate(date, content, emotion);
+      }
+      // 수정중인 경우 (onEdit의 props : 원본 id, 날짜, 내용, 감정)
+      else {
+        onEdit(originData.id, date, content, emotion);
+      }
+    };
 
-	// 일기 작성 시 날짜, 내용, 감정 onCreate의 인자로
-    onCreate(date, content, emotion);
-    
-    // 작성완료 시 home 화면 이동
-    // 일기 작성 옵션 뒤로가기 막기(replace:true)
     navigate('/', {replace:true});
   };
+  const handleRemove = () => {
+    if(window.confirm("정말 삭제하시겠습니까?")) {
+      onRemove(originData.id);
+      navigate('/',{replace:true});
+    }
+  };
+  // useEffect deps(isEdit, originData)가 바뀌면 원본데이터 받아오기
+  // EditPage에서 렌더링하는 DiaryEditor에서만 useEffect가 동작하도록
+  // 캘린더 setDate 당일 날짜, 원본 감정, 원본 내용
+  useEffect(()=>{
+    if(isEdit) {
+      setDate(getStringDate(new Date(parseInt(originData.date))));
+      setEmotion(originData.emotion);
+      setContent(originData.content);
+    }
+  },[isEdit, originData]);
 
-// 경로 이동
   const navigate = useNavigate();
 
   return (
     <div className="DiaryEditor">
+      {/* 제목 표시 조건 */}
       <MyHeader
-        headText={"새 일기쓰기"}
+        headText={isEdit ? "일기 수정하기" : "새 일기쓰기"}
         leftChild={<MyButton text={"< 뒤로가기"} onClick={()=>navigate(-1)} />}
+        rightChild={isEdit && (<MyButton text={"삭제하기"} type={"negative"} onClick={handleRemove} />)}
       />
       <div>
         <section>
@@ -99,9 +119,6 @@ const DiaryEditor = () => {
           <h4>오늘의 감정</h4>
           <div className="inputBox emotionListWrapper">
             {emotionList.map((it)=>(
-            
-            // EmotionItem 컴포넌트
-            // 클릭하여 선택한 감정 id와 감정이 맞는지
               <EmotionItem key={it.emotion_id} {...it} onClick={handleClickEmote} isSelected={it.emotion_id === emotion} />
               // <div key={it.emotion_id}>{it.emotion_descript}</div>
             ))}
