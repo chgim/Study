@@ -153,3 +153,122 @@ print(result) # [6, 12]
 ```
 
 [1,2,3,4] 중에서 짝수에만 3을 곱하고 싶은 경우
+
+## if문
+
+```python run
+if 조건문:
+    수행할 문장1
+    수행할 문장2
+    ...
+else:
+    수행할 문장A
+    수행할 문장B
+    ...
+```
+
+```python run
+money = True
+if money:
+    print("택시를 타고 가라")
+else:
+    print("걸어 가라")
+```
+
+기본 구조
+
+### elif
+
+```python run
+If <조건문>:
+    <수행할 문장1>
+    <수행할 문장2>
+    ...
+elif <조건문>:
+    <수행할 문장1>
+    <수행할 문장2>
+    ...
+elif <조건문>:
+    <수행할 문장1>
+    <수행할 문장2>
+    ...
+...
+else:
+   <수행할 문장1>
+   <수행할 문장2>
+   ...
+```
+
+```python run
+pocket = ['paper', 'cellphone']
+card = True
+if 'money' in pocket:
+    print("택시를 타고가라")
+elif card:
+    print("택시를 타고가라")
+else:
+    print("걸어가라")
+```
+
+## while문
+
+```python run
+while <조건문>:
+    <수행할 문장1>
+    <수행할 문장2>
+    <수행할 문장3>
+    ...
+```
+
+```python run
+treeHit = 0
+while treeHit < 10:
+    treeHit = treeHit +1
+    print("나무를 %d번 찍었습니다." % treeHit)
+    if treeHit == 10:
+        print("나무 넘어갑니다.")
+```
+
+```python run
+coffee = 10
+while True:
+    money = int(input("돈을 넣어 주세요: "))
+    if money == 300:
+        print("커피를 줍니다.")
+        coffee = coffee -1
+    elif money > 300:
+        print("거스름돈 %d를 주고 커피를 줍니다." % (money -300))
+        coffee = coffee -1
+    else:
+        print("돈을 다시 돌려주고 커피를 주지 않습니다.")
+        print("남은 커피의 양은 %d개 입니다." % coffee)
+    if coffee == 0:
+        print("커피가 다 떨어졌습니다. 판매를 중지 합니다.")
+        break
+```
+
+    break를 통해 while문을 강제로 빠져나올 수 있다.
+
+```python run
+a = 0
+while a < 10:
+    a = a + 1
+    if a % 2 == 0: continue
+    print(a)
+```
+
+continue문을 통해 while문을 빠져나가지 않고 while문의 맨 처음(조건문)으로 다시 돌아가게 만들 수 있다.
+
+## 함수
+
+```python run
+def 함수명(매개변수):
+    <수행할 문장1>
+    <수행할 문장2>
+    ...
+```
+
+```python run
+def add(a, b):
+    return a + b
+```
