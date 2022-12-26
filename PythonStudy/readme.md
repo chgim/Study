@@ -154,7 +154,7 @@ print(result) # [6, 12]
 
 [1,2,3,4] 중에서 짝수에만 3을 곱하고 싶은 경우
 
-## if문
+## if문 구조
 
 ```python run
 if 조건문:
@@ -177,7 +177,7 @@ else:
 
 기본 구조
 
-### elif
+### elif 구조
 
 ```python run
 If <조건문>:
@@ -199,6 +199,8 @@ else:
    ...
 ```
 
+기본 구조
+
 ```python run
 pocket = ['paper', 'cellphone']
 card = True
@@ -210,7 +212,7 @@ else:
     print("걸어가라")
 ```
 
-## while문
+## while문 구조
 
 ```python run
 while <조건문>:
@@ -259,7 +261,7 @@ while a < 10:
 
 continue문을 통해 while문을 빠져나가지 않고 while문의 맨 처음(조건문)으로 다시 돌아가게 만들 수 있다.
 
-## 함수
+## 함수 구조
 
 ```python run
 def 함수명(매개변수):
@@ -268,7 +270,138 @@ def 함수명(매개변수):
     ...
 ```
 
+기본 구조
+
 ```python run
+def add(a, b): # a,b는 매개변수(함수에 전달된 값을 저장하는 변수)
+    return a + b
+
+a=3
+b-4
+c=add(a,b) # 인수(함수에 전달하는 값)
+print(c) # 7
+
+```
+
+### 여러개의 입력값을 받는 함수
+
+```python run
+def add_many(*args):
+    result = 0
+    for i in args:
+        result = result + i
+    return result
+
+print(add_many(1,2,3,4,5,6,7,8,9,10)) # 55
+```
+
+*args처럼 매개변수 이름 앞에 *을 붙이면 입력값을 전부 모아서 튜플로 만들어 준다.
+
+## 클래스 구조
+
+```python run
+class FourCal: # 클래스
+    def __init__(self, first, second): # 생성자
+        self.first = first
+        self.second = second
+    def add(self): # 메서드
+        result = self.first + self.second
+        return result
+    def mul(self):
+        result = self.first * self.second
+        return result
+    def sub(self):
+        result = self.first - self.second
+        return result
+    def div(self):
+        result = self.first / self.second
+        return result
+```
+
+### 클래스 상속
+
+```python run
+    class MoreFourCal(FourCal):
+        def pow(self):
+            result = self.first ** self.second
+            return result
+```
+
+클래스를 상속하기 위해서는 다음처럼 클래스 이름 뒤 괄호안에 상속할 클래스 이름을 넣어주면 된다.
+
+### 메서드 오버라이딩
+
+```python run
+class SafeFourCal(FourCal):
+    def div(self):
+        if self.second == 0:  # 나누는 값이 0인 경우 0을 리턴하도록 수정
+            return 0
+        else:
+            return self.first / self.second
+```
+
+부모 클래스에 있는 메서드를 동일한 이름으로 다시 만드는 것을 메서드 오버라이딩이라고 한다.
+메서드를 오버라이딩하면 부모클래스의 메서드 대신 오버라이딩한 메서드가 호출된다.
+
+## 모듈
+
+파이썬에서 모듈은 하나의 .py 파일이다.
+모듈이란 함수나 변수 또는 클래스를 모아 놓은 파이썬 파일이다.
+모듈은 다른 파이썬 프로그램에서 불러와 사용할 수 있게끔 만든 파이썬 파일이라고도 할 수 있다.
+
+```python run
+# mod1.py
 def add(a, b):
     return a + b
+
+def sub(a, b):
+    return a-b
 ```
+
+```python run
+import mod1
+print(mod1.add(3,4)) # 7
+```
+
+import는 이미 만들어 놓은 파이썬 모듈을 사용할 수 있게 해주는 명령어이다.
+
+```python run
+from mod1 import add, sub # from mod1 import * -> 가능
+add(3,4) # 7
+```
+
+위 형식을 사용하면 위와 같이 모듈 이름을 붙이지 않고 바로 해당 모듈의 함수를 쓸 수 있다.
+
+### if **name** == "**main**":
+
+```python run
+# mod1.py
+def add(a, b):
+    return a+b
+
+def sub(a, b):
+    return a-b
+
+print(add(1, 4))
+print(sub(4, 2))
+```
+
+add(1, 4)와 sub(4, 2)의 결과를 출력하는 문장은 정상적으로 출력된다.
+그러나 mod1.py 파일의 add와 sub 함수를 사용하기 위해
+import mod1을 한다면 순간 mod1.py 파일이 실행되어 결괏값을 출력하게 된다.
+
+```python run
+# mod1.py
+def add(a, b):
+    return a+b
+
+def sub(a, b):
+    return a-b
+
+if __name__ == "__main__":
+    print(add(1, 4))
+    print(sub(4, 2))
+```
+
+if **name** == "**main**"을 사용하면 직접 이 파일을 실행했을 때는 **name** == "**main**"이 참이 되어 if문 다음 문장이 수행된다.
+반대로 대화형 인터프리터나 다른 파일에서 이 모듈을 불러서 사용할 때는 **name** == "**main**"이 거짓이 되어 if문 다음 문장이 수행되지 않는다.
