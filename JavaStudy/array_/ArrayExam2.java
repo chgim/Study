@@ -1,15 +1,11 @@
-package array;
+package array_;
 
-public class ArrayExam {
+public class ArrayExam2 {
     public static void main(String[] args) {
-        int[] grade1 = new int[3];
-        int[] grade2 = new int[3];
-
-        grade1[0] = 85;
-        grade1[1] = 65;
-        grade1[2] = 90;
-
-        grade2[0] = 85;
+        int[] grade1 = {70, 80, 90};
+        int[] grade2 = new int[]{50, 40, 30};
+        int[] grade3;
+        grade3 = new int[]{10, 20, 30};
 
         for (int i = 0; i < grade1.length; i++) {
 
@@ -17,8 +13,13 @@ public class ArrayExam {
 
         }
 
-
         for (int i = 0; i < grade2.length; i++) {
+
+            System.out.print(grade2[i] + " "); // 인덱스를 이용한 배열로의 접근
+
+        }
+
+        for (int i = 0; i < grade3.length; i++) {
 
             System.out.print(grade2[i] + " "); // 인덱스를 이용한 배열로의 접근
 

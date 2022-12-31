@@ -1,4 +1,4 @@
-package array;
+package array_;
 
 public class ArrayExam4 {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class ArrayExam4 {
 
         int[] arr2 = new int[5];
 
-        System.arraycopy(arr1, 0, arr2, 0, arr1.length);
+        System.arraycopy(arr1, 0, arr2, 0, arr1.length); //배열 복사
 
         for(int i=0; i < arr1.length;i++) {
             System.out.println(arr2[i]);
