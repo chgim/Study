@@ -4,8 +4,8 @@ from email.mime.multipart import MIMEMultipart
 
 SMTP_SERVER="smtp.naver.com"
 SMTP_PORT=465
-USER="kcho1128"
-PASSWORD="hokimch2899$$"
+USER=""#아이디
+PASSWORD=""#비밀번호
 
 def send_mail(name, addr, title, content):
     msg=MIMEMultipart('alternative')# alernative: 텍스트 메일을 보낼때 필요한 양식
