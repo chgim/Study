@@ -1,0 +1,44 @@
+0) MVT 패턴: Model / View(기존 Controller) / Template(기존 View)
+    모델: 데이터베이스에 저장되는 데이터들
+    템플릿: 사용자에게 보이는 UI
+    뷰: 실질적으로 프로그램 로직이 동작하여 데이터를 가져오고 처리결과를 템플릿에 전달하는 역할
+1) ORM: 객체와 관계형 데이터베이스를 연결. 데이터베이스 대신 (객체)클래스를 사용하여 데이터를 처리. 
+2) URLconf-URL 정의: 클라이언트로부터 요청을 받으면 장고는 가장 먼저 요청에 들어있는 URL을 분석. 요청에 들어있는 URL이 urls.py 파일에 정의된 URL 패턴과 
+    매칭되는지 분석. 
+1) 가상환경 만들기
+    python -m venv venv
+2) venv 가상환경 안 Scripts 폴더 안 activate 파일을 실행. 가상환경 실행.
+    venv\Scripts\activate
+3) 현재 python에 pip로 설치된 패키지 목록 정보 만들기
+    pip freeze 
+4) freeze 명령어를 통해 나온 출력 결과를 파일로 저장 시  
+    pip freeze > requirements.txt
+5) requirements.txt 파일에 있는 패키지를 모두 설치
+    pip install -r requirements.txt
+6) 장고 설치하고 실행하기
+    pip install django
+7) 장고 프로젝트 만들기
+    django-admin startproject 프로젝트명
+8) 장고 로컬서버 실행하기
+    python manage.py runserver
+9) 애플리케이션 생성
+    python manage.py startapp 애플리케이션명
+10) 데이터베이스 엔진 - settings.py 파일에서 수정 가능
+     디폴트로 SQLite3 사용
+11) 타임존 설정 - settings.py 파일에서 수정 가능
+     'ko-KR', 'Asia/Seoul', True, False
+12) 테이블 생성 -> db.sqlite3 생성 / 데이터베이스 변경사항 반영
+     python manage.py migrate
+13) 관리자 생성
+     python manage.py createsuperuser
+     ID
+     PW
+     PW
+14) 데이터베이스의 변경사항을 알려주는 정보
+     python manage.py makemigrations
+15) 패키지 구분
+     __init__.py
+16) request 객체는 뷰 함수의 필수 인자
+17) PK를 클래스에 지정하지 않고도 장고는 PK에 대한 속성을 NOT NULL 및 Autoincreasement로, 이름은 id로 해서 자동으로 만듬
+18) 장고에서는 테이블을 하나의 클래스로 정의하고 테이블의 컬럼은 클래스의 변수(속성)으로 매핑
+19) 테이블을 새로 만들 때는 models.py와 admin.py 파일을 함께 수정해야 한다.

@@ -1,9 +1,13 @@
 {% if latest_question_list %}
+<!--latest_question_list 객체는 index() 뷰 함수에서 넘겨주는 파라미터-->
 <ul>
+  <!--latest_question_list 객체의 내용을 순회하면서 question_text를 순서 없는 리스트 형식으로 화면에 보여줌, 각 태그에 URL 링크 연결-->
   {% for question in latest_question_list %}
   <li><a href="/polls/{{question.id}}/">{{question.question_text}}</a></li>
   {% endfor %}
 </ul>
-{% else %}
+{% else %}<!--객체에 내용이 없다면 -->
 <p>No polls are available</p>
 {% endif %}
+
+<!--question_text, question.id 두가지 정보가 함께 들어있는 Question 객체를 뷰 함수로부터 넘겨 받아야함-->

@@ -1,19 +1,21 @@
-<form action="/polls/{{question.id}}/vote/" method="post">
-  {% csrf_token %}
+<form action="/polls/{{question.id}}/vote/" method="post"> <!--폼에 입력된 데이터는 post 방식으로 보냄. -->
+  {% csrf_token %} <!--보안측면에서 csrf 공격 주의. 이를 방지하기위해 제공-->
   <fieldset>
-    <legend><h1>{{ question.question_text }}</h1></legend>
+    <legend><h1>{{ question.question_text }}</h1></legend> <!--제목-->
     {% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-    {% endif %} {% for choice in question.choice_set.all %}
+    <p><strong>{{ error_message }}</strong></p><!--에러 발생 시 굵은 글자로 에러 메시지 화면에 나타냄-->
+    {% endif %} {% for choice in question.choice_set.all %} <!--choice_set: Question 객체의 choice_set 속성에 들어있는 모든 항목-->
     <input
       type="radio"
       name="choice"
-      id="choice{{ forloop.counter }}"
+      id="choice{{ forloop.counter }}" 
       value="{{ choice.id }}"
     />
+    <!--forloop.counter: for 루프를 실행한 횟수를 담고 있다-->
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label
     ><br />
     {% endfor %}
   </fieldset>
-  <input type="submit" value="Vote" />
+  <input type="submit" value="Vote" /><!--사용자가 선택한 폼 데이터가 post 방식으로 polls/vote/url로 전송-->
 </form>
+<!--question.choice_set.all(): Question 테이블의 question 레코드에 연결된 Choice 테이블의 모두를 뜻함-->
