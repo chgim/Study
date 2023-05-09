@@ -1,3 +1,5 @@
 python -m venv venv 
 pip install openpyxl
 pip install selenium  webdriver-manager
+
+정적 / iframe / action_chains / login 막히는 서비스
