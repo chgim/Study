@@ -22,14 +22,14 @@ try:
     elem=driver.find_element(By.CLASS_NAME,"custom-17amef")
     ac.click(elem)
     ac.perform()
-    ac.pause(2)
+    ac.pause(3)
 
 
     elem2=driver.find_element(By.CLASS_NAME,"custom-134bl1m")
     ac.click(elem2)
     ac.send_keys("kim")
     ac.send_keys(Keys.TAB)
-    ac.pause(2)
+    ac.pause(3)
     ac.send_keys("chanho")
     #여기까지 action 등록
     ac.perform()

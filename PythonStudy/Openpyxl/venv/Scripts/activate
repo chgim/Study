@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Study\PythonStudy\Openpyxl\venv"
+VIRTUAL_ENV="C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Openpyxl\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
