@@ -48,9 +48,10 @@ k = 2
 # # (알림 수, 신고당한 목록)
 # reports = {name: [] for name in id_list}
 # counts = {name: 0 for name in id_list}
-reports = {"muzi": [], "frodo": [], "apeach": [], "neo": []}
-counts = {"muzi": 0, "frodo": 0, "apeach": 0, "neo": 0}
-
+reports = {"muzi": [], "frodo": [], "apeach": [], "neo": []} # 신고한 사람 색출
+counts = {"muzi": 0, "frodo": 0, "apeach": 0, "neo": 0} 
+reports = {name: set() for name in id_list}
+counts = {name: 0 for name in id_list}
 for row in report: # 신고한 사람 색출
     src, dest = row.split(' ')
     reports[dest].append(src)
@@ -65,4 +66,8 @@ for name in id_list:
         for target in reports[name]:
             counts[target] += 1
 
-print([counts[name] for name in id_list])
+
+result=[]
+for name in id_list:
+    result.append(counts[name])
+print(result)

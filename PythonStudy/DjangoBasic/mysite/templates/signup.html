@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <form method="post" action=".">
+            {% csrf_token %}
+            <input type="text" name="user_id"/>
+            <input type="password" name="user_password"/>
+            <input type="submit" value="회원가입"/>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+<html>
+    <body>
+        {% if member %}
+        <span>{{% memer.user_id %}}님</span>
+        <a href="/member/logout/">로그아웃</a>
+        {% endif %}
+        <form method="POST" action=".">
+            {% csrf_token %}
+            <input type="submit" value="test"/>
+        </form>
+        <span>{{ question }}</span>
+    </body>
+</html>

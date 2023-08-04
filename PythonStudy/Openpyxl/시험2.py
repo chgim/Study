@@ -35,22 +35,22 @@
 # 예제 출력 5 
 # 12
 
-N = int(input())  # 정수 N 입력 받기
+num = int(input())  # 정수 N 입력 받기
 
-original = N  # 초기 값 저장
+original = num  # 초기 값 저장
 count = 0  # 사이클 길이 초기화
 
 while True:
-    tens = N // 10  # 십의 자리 수
-    units = N % 10  # 일의 자리 수
+    tens = num // 10  # 십의 자리 수
+    units = num % 10  # 일의 자리 수
 
-    new_num = (units * 10) + ((tens + units) % 10)  # 새로운 수 계산
+    new_num = (units * 10) + ((tens + units) % 10)  # 새로운 수 계산 일의자리에 10 곱해서 십의자리로 만들고 십의자리+일의자리의 일의자리만 추출
 
     count += 1  # 사이클 길이 증가
 
     if new_num == original:  # 새로운 수와 초기 값이 같으면 반복문 종료
         break
 
-    N = new_num  # N을 새로운 수로 업데이트
+    num = new_num  # N을 새로운 수로 업데이트
 
 print(count)  # 사이클 길이 출력55
