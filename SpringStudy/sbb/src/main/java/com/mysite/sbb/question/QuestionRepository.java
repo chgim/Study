@@ -1,5 +1,6 @@
 package com.mysite.sbb.question;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
@@ -7,6 +8,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     Question findBySubjectAndContent(String subject, String content);
 
     List<Question> findBySubjectLike(String subject);
+    Page<Question> findAll(Pageable pageable);
 }
 /*JpaRepository를 상속할 때는 제네릭스 타입으로 <Question, Integer> 처럼 리포지터리의 대상이 되는 엔티티의 타입(Question)과 해당 엔티티의 PK의 속성 타입(Integer)을 지정해야 한다.
  이것은 JpaRepository를 생성하기 위한 규칙이다.*/
@@ -24,3 +26,10 @@ OrderBy	findBySubjectOrderByCreateDateAsc(String subject)	검색 결과를 정�
 */
 
 // 쿼리 생성 규칙에 대한 다음의 공식문서를 참고
+/*페이징을 구현하기 위해 추가로 설치해야 하는 라이브러리는 없다. JPA 환경 구축시 설치했던 JPA 관련 라이브러리에 이미 페이징을 위한 패키지들이 들어있기 때문이다.
+
+다음의 클래스들을 이용하면 페이징을 쉽게 구현할 수 있다.
+
+org.springframework.data.domain.Page
+org.springframework.data.domain.PageRequest
+org.springframework.data.domain.Pageable*/

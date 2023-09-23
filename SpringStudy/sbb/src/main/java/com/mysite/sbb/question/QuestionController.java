@@ -1,5 +1,6 @@
 package com.mysite.sbb.question;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
@@ -20,12 +21,12 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList", questionList);
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+        Page<Question> paging = this.questionService.getList(page);
+        model.addAttribute("paging", paging);
         return "question_list";
     }
-
+//http://localhost:8080/question/list?page=0 처럼 GET 방식으로 요청된 URL에서 page값을 가져오기 위해 @RequestParam(value="page", defaultValue="0") int page 매개변수가 list 메서드에 추가되었다. URL에 페이지 파라미터 page가 전달되지 않은 경우 디폴트 값으로 0이 되도록 설정했다.
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id,  AnswerForm answerForm) { // 변하는 id 값을 얻을 때에는 위와 같이 @PathVariable 애너테이션을 사용. @GetMapping(value = "/question/detail/{id}") 에서 사용한 id와 @PathVariable("id")의 매개변수 이름이 동일해야 한다.
         Question question = this.questionService.getQuestion(id);
