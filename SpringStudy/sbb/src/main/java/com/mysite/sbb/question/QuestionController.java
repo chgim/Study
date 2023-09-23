@@ -2,6 +2,10 @@ package com.mysite.sbb.question;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
+import java.security.Principal;
+import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.UserService;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,7 @@ import com.mysite.sbb.answer.AnswerForm;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
@@ -35,17 +40,19 @@ public class QuestionController {
     }
 // QuestionController의 GetMapping으로 매핑한 메서드도 다음과 같이 변경해야 한다. 왜냐하면 question_form.html 템플릿은 "질문 등록하기" 버튼을 통해 GET 방식으로 요청되더라도 th:object에 의해 QuestionForm 객체가 필요하기 때문이다.
 // GET 방식에서도 question_form 템플릿에 QuestionForm 객체가 전달될 것이다.
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
-
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
-    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) { // questionCreate 메서드의 매개변수를 subject, content 대신 QuestionForm 객체로 변경했다. subject, content 항목을 지닌 폼이 전송되면 QuestionForm의 subject, content 속성이 자동으로 바인딩 된다. 이것은 스프링 프레임워크의 바인딩 기능이다.
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) { // questionCreate 메서드의 매개변수를 subject, content 대신 QuestionForm 객체로 변경했다. subject, content 항목을 지닌 폼이 전송되면 QuestionForm의 subject, content 속성이 자동으로 바인딩 된다. 이것은 스프링 프레임워크의 바인딩 기능이다.
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
-        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(),siteUser);
         return "redirect:/question/list";
     }
 //@GetMapping("/question/list")

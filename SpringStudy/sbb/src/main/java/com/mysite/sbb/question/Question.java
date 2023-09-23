@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
+import com.mysite.sbb.user.SiteUser;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
@@ -23,6 +24,9 @@ public class Question {
     @Id //  id 속성을 기본 키로 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 데이터를 저장할 때 해당 속성에 값을 따로 세팅하지 않아도 1씩 자동으로 증가하여 저장.strategy는 고유번호를 생성하는 옵션으로 GenerationType.IDENTITY는 해당 컬럼만의 독립적인 시퀀스를 생성하여 번호를 증가시킬 때 사용
     private Integer id;
+
+    @ManyToOne
+    private SiteUser author;
 
     @Column(length = 200) // 엔티티의 속성은 테이블의 컬럼명과 일치하는데 컬럼의 세부 설정을 위해 @Column 애너테이션을 사용
     private String subject;
