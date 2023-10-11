@@ -3,7 +3,7 @@ class Test:
         self._test_value = value
 
     # 함수를 속성값으로 만들음. 많은 활용도. 맘대로 값을 바꿀 수 있음. 외부에서 값을 세팅하지 못하게 막을 수 있음. readonly
-    @property
+    @property  # 데코레이터
     def test_value(self):
         if self._test_value < 10:
             return 100
