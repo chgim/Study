@@ -650,6 +650,9 @@ f(2, 3, flag=True, mode='fast', header='debug')
 - 클래스에서 메서드를 만들 때 @staticmethod, @classmethod, @abstractmethod 등을 붙였는데, 이렇게 @로 시작하는 것들이 데코레이터임
 - 함수(메서드)를 장식한다고 해서 이런 이름이 붙었음
 - 기존 함수를 수정하지 않으면서 추가 기능을 구현할 때 사용
+- 파이썬에서 함수는 "객체" 따라서 변수에 담을 수 있다.
+- a(f(x))와 같이 함수를 인자로 활용하여 함수 또는 클래스를 래핑, 바꿔치기
+- 원본 객체의 보존: @wraps
 
 ```python run
 class Calc:
