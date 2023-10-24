@@ -1,16 +1,130 @@
-# flutter_basic_1
+# Flutter 개념 정리
 
-A new Flutter project.
+## 크로스 플랫폼 개발
 
-## Getting Started
+- 하나의 코드만을 개발해서 두 os(안드로이드, iOS)에서 모두 실행할 수 있다면 많은 개발비용 절약 가능
+  - 하이브리드 앱, 웹앱 탄생(성능 부족, 지원하는 기능 부족)
+    - 크로스 플랫폼 앱 개발방식
+- 여러 플랫폼에서 동작하는 앱을 만드는 개발 방식
+- 각 플랫폼에서 네이티브하게 실행되는 실제 앱을 만들음
+- 리액트 네이티브, 플러터
 
-This project is a starting point for a Flutter application.
+## 플러터
 
-A few resources to get you started if this is your first Flutter project:
+- 구글이 개발한 크로스 플랫폼 앱 개발 프레임워크
+- 리액트 네이티브와는 달리 다트라는 자체 언어를 사용해 UI부터 로직까지 한번에 구현할 수 있는 앱 개발자 친화적인 프레임워크
+- 프레임워크 영역: 다트를 코드로 작성
+- 엔진 영역: 시스템 이벤트, 플랫폼 채널등 지원
+- 임베더 영역: 실제 앱이 동작될 플랫폼에 맞게 위젯을 빌드
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Dart(다트)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 객체지향 프로그래밍
+
+- 클래스: 객체를 만들기 위한 일종의 템플릿. 내부에 정의된 변수와 함수로 구성
+- 객체: 클래스로 생성한 하나의 개체. 클래스에서 정의한 변수와 메서드를 사용
+- 메서드: 클래스 내부에서 선언된 함수. 객체가 사용할 수 있음
+- 상속: 이미 만들어진 클래스(부모)를 기반으로 몇가지 기능을 추가해 새로 클래스(자식) 생성
+- 오버라이딩: 클래스를 상속받았을 때 부모 클래스의 메서드를 수정해서 사용
+
+### 비동기 프로그래밍
+
+```dart run
+Future<List<Image>?> fetchImages() async {
+ List<Image> results= = await fetchImageFromServer();
+ return results;
+}
+```
+
+- 오래 걸리는 작업에 대한 처리
+- 앞서 실행된 작업이 오래 걸릴 경우 다른 작업들을 계속 수행. 사용자의 입장에서는 오래 걸리는 작업을 전부 기다릴 필요 없이 화면을 빠르게 확인.
+- Future
+- async: 해당 함수가 비동기 처리를 진행하는 함수라는 뜻
+  - await: async와 함께 사용. 오래 걸리는 작업 앞에 붙는 키워드. 오래 걸리는 작업이 완료되기를 기다리겠다는 키워드
+- 작성한 비동기 함수는 결과값으로 List<Image>를 가져옴. 그러나 예기치 못함 에러나 작업 중단 등의 이벤트 발생 가능성 있음
+  - 결과값이 항상 List<Image> 형태라고 장담 X
+    - 이러한 사태 방지 위해 비동기 함수의 return 타입은 Future타입으로 포장.
+
+### Nullable 변수
+
+- Null Safety는 말 그대로 Null로부터 안전하다는 뜻.
+- Null Safety가 없는 언어의 경우 null이 들어가 있는 변수로 무언가를 하려고 하면 에러가 발생
+- Null Safety는 이런 경우를 원천 차단
+- Null이 발생할 만한 코드에 미리 에러를 띄워 Null이 발생하지 않도록 예외처리를 강제함.
+- String name; // non-nullable 변수 | String? name; // nullable 변수  
+  일반 변수는 null 값을 할당할 수 없음
+  ![image](https://github.com/chgim/Study/assets/106460430/0e5715a3-46ec-41c0-9c99-e5505d98feee)
+  ? 기호를 사용하여 Nullable 변수를 선언하면 그 변수는 null 값을 할당할 수 있음
+  ![image](https://github.com/chgim/Study/assets/106460430/4a8ab9ec-e4b4-4758-98d2-24fb26def2d6)
+
+### Mixins
+
+- Dart에서 상속을 할 때는 보통 Extends를 사용. Extends는 다중 상속이 불가능하다는 단점이 있는데 이때 다중 상속을 하기 위해 필요한 것이 Mixin, With.
+- Mixins은 다수의 클래스 계층에서 클래스의 코드를 재사용 할 수 있는 방법
+- 한 개 이상의 Mixin 이름과 함께 With 키워드를 적용하여 사용 가능
+- With 키워드와 사용 할 Mixin의 이름을 명시하면 됨
+  ![image](https://github.com/chgim/Study/assets/106460430/d7a4022b-d5c8-479c-a89d-8d79a821102a)
+
+### Future
+
+- Future는 어떤 작업의 결과값을 나중에(Future) 받기로 약속(Promise) 받는 것
+- 비동기 작업은 대체로 소요 시간이 길고 과정 중에 예기치 못한 에러 등으로 실패할 가능성도 있어 항상 어떤 타입의 결과를 보장 받지 못하므로 Future 타입으로 감싸게 된다.
+- 비동기 함수 호출은 결과를 기다리지 않고 바로 다른 작업으로 넘어갈 수도 있다. 그 후 작업이 완료되면 결과를 받는 방식으로 비동기 처리한다.
+  ![image](https://github.com/chgim/Study/assets/106460430/82bf7210-64c7-4e92-a12a-778d60cda0da)
+
+### 메타데이터
+
+- 코드에 추가적인 정보를 더하고 싶다면 사용
+- 메타데이터 표가는 @ 문자로 시작해서 deprecated 같은 컴파일 타임 상수에 대한 참조 또는 상수 생성자에 대한 호출로 이어짐
+
+```dart run
+class Television {
+  /// Use [turnOn] to turn the power on instead.
+  @Deprecated('Use turnOn instead')
+  void activate() {
+    turnOn();
+  }
+
+  /// Turns the TV's power on.
+  void turnOn() {...}
+  // ···
+}
+```
+
+## 플러터 설계 컨셉
+
+### 위젯
+
+- 플러터에서 화면 안의 모든 요소들은 위젯
+- 글자, 버튼, 사진, 화면도 하나하나의 위젯
+- 플러터의 화면 구조는 여러 위젯들이 트리 형태로 구성
+- 클래스의 형태. 위젯을 만들어주는 클래스를 작성하고 이 클래스로 객체를 생성하며 이 객체가 화면 속 하나의 위젯이 되는것
+- 프로퍼티(멤버), 생성자, 메서드(build)로 구성
+
+### State(상태)
+
+- 어떤 상태에 대한 값을 저장하는 변수를 가리킴.
+- ex: bool isAirOn; // True, False
+
+### Stream(스트림)
+
+- 흐름
+- 시간이 지남에 따라 발생하는 데이터의 흐름
+- 데이터를 불러오는데 시간이 오래 걸리거나, 지속적으로 데이터를 받아야 하는 경우 스트림을 통해 구현
+- 스트림을 통해 받아야 하는 데이터들은 언제 데이터 수신이 완료되는지 그 시점을 명확히 알 수 없다는 단점 존재.
+  - 데이터를 생성하는 영역, 데이터를 사용하는 영역 구분하여 구현, 생산 영역을 사용 영역이 구독 해 그 변화를 확인
+
+## 기본 위젯 사용법
+
+### Container
+
+- 가장 기초적인 위젯
+- 위젯을 담는 역할
+- 위젯을 감싸고 padding 프로퍼티(여백 설정) 등의 기능
+
+```dart run
+
+
+
+
+```
