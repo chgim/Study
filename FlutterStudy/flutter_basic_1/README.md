@@ -69,7 +69,7 @@ Future<List<Image>?> fetchImages() async {
 
 - Future는 어떤 작업의 결과값을 나중에(Future) 받기로 약속(Promise) 받는 것
 - 비동기 작업은 대체로 소요 시간이 길고 과정 중에 예기치 못한 에러 등으로 실패할 가능성도 있어 항상 어떤 타입의 결과를 보장 받지 못하므로 Future 타입으로 감싸게 된다.
-- 비동기 함수 호출은 결과를 기다리지 않고 바로 다른 작업으로 넘어갈 수도 있다. 그 후 작업이 완료되면 결과를 받는 방식으로 비동기 처리한다.
+- 비동기 함수 호출은 결과를 기다리지 않고 바로 다른 작업으로 넘어갈 수도 있다. 그 후 작업이 완료되면 결과를 받는 방식으로 비동기 처리
   ![image](https://github.com/chgim/Study/assets/106460430/82bf7210-64c7-4e92-a12a-778d60cda0da)
 
 ### 메타데이터
@@ -116,15 +116,159 @@ class Television {
 
 ## 기본 위젯 사용법
 
-### Container
+### Container 위젯
 
 - 가장 기초적인 위젯
 - 위젯을 담는 역할
 - 위젯을 감싸고 padding 프로퍼티(여백 설정) 등의 기능
+- color, width, height, padding 프로퍼티
 
 ```dart run
+import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
 
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Container',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Container'),
+          centerTitle: true,
+        ),
+        body: Container(
+          width: 300,
+          height: 300,
+          color: Colors.cyanAccent,
+          padding:EdgeInsets.all(30),
+            child: Text(
+              "컨테이너",
+              style: TextStyle(fontSize: 50),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### EdgeInsets 위젯
+
+- 여백 설정
+- EdgeInsets.all // 상하좌우 모든 방향에 30만큼의 여백
+- EdgeInsets.fromLTRB(left: , top: , right: , bottom: ,) // 좌, 상, 우, 하 방향으로
+- EdgeInsets.only(left: ) // 한방향
+- EdgeInsets.symmentric(vertical: , horizonal: ) // 세로, 가로
+
+### Padding 위젯
+
+- 프로퍼티로 padding과 child만 갖고있음
+
+### Center 위젯
+
+- 가운데 정렬
+
+### Image 위젯
+
+- 이미지를 넣기 위한 위젯
+
+### Text 위젯
+
+- 문자열을 나타낼 수 있는 위젯
+- child를 활용하는 대신 문자열 넣으면 됨
+- TextStyle 위젯을 통해 문자열 꾸미기 가능
+
+### 플러터에서 위젯 배치 시 사용하는 레이아웃 형태의 위젯
+
+- Column, Row, ListView, Stack
+
+## 상태 기반 카운터 앱 만들기
+
+main.dart
+
+```dart run
+import 'package:flutter/material.dart';
+import 'package:flutter_basic_1/screens/first_screen.dart';
+
+void main() {
+  runApp(MyApp());
+  // runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // useMaterial3: true,
+        primarySwatch: Colors.blue,
+      ),
+      home: FirstScreen(),
+    );
+  }
+}
+
+```
+
+screens/first_screen.dart
+
+```dart run
+import 'package:flutter/material.dart';
+
+class FirstScreen extends StatefulWidget {
+  _FirstScreenState createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  int count = 0;
+
+  void increase() {
+    setState(() {
+      count = count + 1;
+    });
+  }
+
+  void decrease() {
+    setState(() {
+      count = count - 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('카운터 앱'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('카운트:$count', style: TextStyle(fontSize: 25)),
+            Padding(padding: EdgeInsets.all(20)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(onPressed: decrease, child: Text('- 감소')),
+                ElevatedButton(onPressed: increase, child: Text('+ 증가')),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 ```

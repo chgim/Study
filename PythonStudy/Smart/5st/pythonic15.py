@@ -12,3 +12,11 @@ def function(a, b, c):
 value = {"a": 1, "b": 2, "c": 3}
 # function(a=1, b=2, c=3)
 function(**value)
+
+
+def function(**kwargs):
+    print(kwargs)
+
+
+value = {"a": 1, "b": 2, "c": 3}
+function(**value)

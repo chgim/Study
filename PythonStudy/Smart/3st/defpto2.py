@@ -1,3 +1,6 @@
+od = "mac"
+assert od == "mac", "wrong"
+
 try:
     int("adsds")
 # except:  # 위험한 프로그래밍

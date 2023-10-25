@@ -12,9 +12,10 @@ class Size:
 
 s = Size(100, 200)  # 생성자 함수 호출, 객체 변수 생성
 s()  # 객체 호출
-
+print("---" * 20)
 print(s.width)
 print(s.height)  # 객체는 상태값을 가질 수 있음. 메서드도 여러개 만들 수 있음
+print("---" * 20)
 
 
 def size(width, height):  # 함수는 휘발성

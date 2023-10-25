@@ -19,30 +19,27 @@ class DateRangeIterable:
         return t
 
 
-start_date = datetime.date(2023, 10, 1)
+start_date = datetime.date(2023, 10, 20)
 # print(start_date + datetime.timedelta(days=2))
-end_date = datetime.date(2023, 10, 3)
+end_date = datetime.date(2023, 10, 26)
 date_range = DateRangeIterable(start_date, end_date)
 
 
 for date in date_range:
     print(date)
 
-""" 
-print(next(date_range))
-print(next(date_range))
-print(next(date_range))
 
-a = iter(date_range)
-print(a)
-"""
+# print(next(date_range))
+# print(next(date_range))
+# print(next(date_range))
 
-"""
-iterator=iter(date_range)
-next(iterator)
-next(iterator)
-next(iterator)
-next(iterator)
-next(iterator)
+# a = iter(date_range)
+# print(a)
 
-"""
+
+# iterator = iter(date_range)
+# next(iterator)
+# next(iterator)
+# next(iterator)
+# next(iterator)
+# next(iterator)
