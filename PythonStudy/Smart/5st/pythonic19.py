@@ -5,10 +5,10 @@ from functools import wraps
 def traced_time(func):
     @wraps(func)
     def wrapped(*args, **kwargs):
-        s = time.time()
+        s = time.time()  # 현재 시간
 
-        res = func(*args, **kwargs)
-        print(time.time() - s)
+        res = func(*args, **kwargs)  # 함수 돌림
+        print(time.time() - s)  # 함수 돌리고 지난 시간 계산
         return res
 
     return wrapped

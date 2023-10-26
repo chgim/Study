@@ -5,11 +5,11 @@ from functools import wraps
 def logging_decorator(func):
     @wraps(func)
     def decorated(*args, **kwargs):  # 인자값이 얼마나 있는지 모르니깐 가변인자 사용
-        now = datetime.datetime.now()
-        fnt = now.strftime("%Y-%m-%d %H:%M:%S")
-        name = func.__name__
+        now = datetime.datetime.now()  # 현재 시각
+        fnt = now.strftime("%Y-%m-%d %H:%M:%S")  # 현재 시간을 원하는 형식으로 포맷합니다.
+        name = func.__name__  # 함수의 이름을 가져옵니다.
 
-        print(f"[{fnt}] Called [{name}{args},{kwargs}]")
+        print(f"[{fnt}] Called [{name}{args},{kwargs}]")  # 함수 호출을 로깅합니다.
 
         res = func(*args, **kwargs)
         return res

@@ -45,6 +45,10 @@ Future<List<Image>?> fetchImages() async {
   - 결과값이 항상 List<Image> 형태라고 장담 X
     - 이러한 사태 방지 위해 비동기 함수의 return 타입은 Future타입으로 포장.
 
+### Scaffold 변수
+
+- 앱의 화면이 기본적으로 갖추고 있는 기능들을 선언해 놓은 위젯
+
 ### Nullable 변수
 
 - Null Safety는 말 그대로 Null로부터 안전하다는 뜻.
@@ -182,6 +186,13 @@ class MyApp extends StatelessWidget {
 - 문자열을 나타낼 수 있는 위젯
 - child를 활용하는 대신 문자열 넣으면 됨
 - TextStyle 위젯을 통해 문자열 꾸미기 가능
+
+### Column 위젯
+
+- 위에서 아래로 위젯들을 배치
+  - mainAxisAlignment: 위에서 아래로 가능 방향
+  - crossAxisAlignment: 왼쪽에서 오른쪽으로 가능 방향
+  - Column 내의 children 위젯들을 정렬시키는 프로퍼티
 
 ### 플러터에서 위젯 배치 시 사용하는 레이아웃 형태의 위젯
 
