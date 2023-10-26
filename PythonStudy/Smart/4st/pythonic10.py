@@ -22,3 +22,14 @@ print(d.aac)
 # 1. 진짜 그 변수가 있는지 찾아봄
 # 2. property가 있는지 찾아봄
 # 3. 매직 메서드 실행
+
+
+# 200
+# 300
+# Traceback (most recent call last):
+#   File "c:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart\4st\pythonic10.py", line 20, in <module>
+#     print(d.aac)
+#           ^^^^^
+#   File "c:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart\4st\pythonic10.py", line 14, in __getattr__
+#     raise AttributeError("에러 내고 싶어요")
+# AttributeError: 에러 내고 싶어요. Did you mean: 'aaa'?

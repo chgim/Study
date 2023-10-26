@@ -50,3 +50,15 @@ def function3(timeout=DEFAULT_TIMEOUT, **kwargs):
 function3()
 
 #################################
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic14.py
+# 1 2
+# 1 [2, 3, 4, 5]
+# 1 [2, 3, 4, 5]
+# 1 [2, 3, 4] 5
+# ------------------------------
+# 1 (2, 3, 4, 5, 6, 7)
+# ------------------------------
+# {'bbb': 200}
+# ------------------------------
+# 10

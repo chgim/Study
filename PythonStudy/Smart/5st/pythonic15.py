@@ -20,3 +20,7 @@ def function(**kwargs):
 
 value = {"a": 1, "b": 2, "c": 3}
 function(**value)
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic15.py
+# 1 2 3
+# {'a': 1, 'b': 2, 'c': 3}

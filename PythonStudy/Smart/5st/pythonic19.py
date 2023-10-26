@@ -21,3 +21,8 @@ def f1():
 
 
 f1()
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic19.py
+# 완료
+# 2.0003271102905273

@@ -23,3 +23,12 @@ def size(width, height):  # 함수는 휘발성
 
 
 size(100, 300)
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic11.py
+# 20000
+# ------------------------------------------------------------
+# 100
+# 200
+# ------------------------------------------------------------
+# 30000

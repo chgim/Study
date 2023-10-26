@@ -22,3 +22,7 @@ original = login_required(original)
 
 # a = original
 # a()
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic17.py
+# original

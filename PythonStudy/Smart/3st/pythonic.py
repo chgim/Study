@@ -31,3 +31,10 @@ print(len(items))
 print(items["StringValue"])
 
 # for문은 IndexError가 나올때까지 인덱스 반복
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/3st/pythonic.py
+# a
+# b
+# c
+# 3
+# Hello

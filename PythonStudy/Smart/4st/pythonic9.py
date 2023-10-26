@@ -12,3 +12,7 @@ b = Boundaries(100, 200)
 
 if [10, 20] in b:
     print("Hello")
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/4st/pythonic9.py
+# Hello

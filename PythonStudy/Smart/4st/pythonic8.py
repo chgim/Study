@@ -25,3 +25,9 @@ print(date_range[0])
 
 for date in date_range:
     print(date)
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/4st/pythonic8.py
+# 2023-10-01
+# 2023-10-01
+# 2023-10-02
+# 2023-10-03

@@ -16,3 +16,7 @@ print(t._Test__test_value)
 
 t = Test2(10)
 print(t._Test2__test_value)
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/4st/pythonic6.py
+# 0
+# 10

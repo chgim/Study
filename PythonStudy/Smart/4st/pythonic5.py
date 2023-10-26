@@ -34,3 +34,15 @@ print(t._test_value)
 t.test_value = 1234
 print(t.test_value)
 #  @test_value.setter 사용으로 값 변경 가능 세팅
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/4st/pythonic5.py
+# 100
+# 0
+# Traceback (most recent call last):
+#   File "c:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart\4st\pythonic5.py", line 34, in <module>
+#     t.test_value = 1234
+#     ^^^^^^^^^^^^
+#   File "c:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart\4st\pythonic5.py", line 18, in test_value
+#     raise ValueError("100보다 큰 수는 안됩니다.")
+# ValueError: 100보다 큰 수는 안됩니다.

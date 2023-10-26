@@ -36,3 +36,12 @@ d.aa()
 d.bb()
 
 print(D.mro())
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic12.py
+# aa
+# bb
+# ------------------------------
+# bb- aa
+# bb
+# [<class '__main__.D'>, <class '__main__.B'>, <class '__main__.A'>, <class 'object'>]

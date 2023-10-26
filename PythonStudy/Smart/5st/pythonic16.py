@@ -24,3 +24,10 @@ def func2(x, y, *args, kw1):
 
 
 func2(10, 20, 30, 40, 50, kw1=60)
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic16.py
+# True
+# ------------------------------
+# 10
+# ------------------------------
+# 10 20

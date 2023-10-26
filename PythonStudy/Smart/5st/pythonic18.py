@@ -22,3 +22,11 @@ def aa(value):
 aa(100)
 print("---" * 10)
 print(aa.__name__)  # decorated_function
+
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/5st/pythonic18.py
+# Decorated!
+# 100
+# After
+# ------------------------------
+# aa

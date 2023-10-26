@@ -43,3 +43,12 @@ for date in date_range:
 # next(iterator)
 # next(iterator)
 # next(iterator)
+
+# C:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart>C:/Users/kch11/AppData/Local/Programs/Python/Python311/python.exe c:/Users/kch11/Documents/GitHub/Study/PythonStudy/Smart/4st/pythonic7.py
+# 2023-10-20
+# 2023-10-21
+# 2023-10-22
+# 2023-10-23
+# 2023-10-24
+# 2023-10-25
+# 2023-10-26
