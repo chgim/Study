@@ -37,3 +37,14 @@ with BackupHandler() as handler:
 # raise Exception
 
 # f.close()
+
+
+# Stop db
+# <class 'RuntimeError'>
+# my message
+# <traceback object at 0x00000173A05284C0>
+# Start db
+# Traceback (most recent call last):
+#   File "c:\Users\kch11\Documents\GitHub\Study\PythonStudy\Smart\3st\pythonic2.py", line 26, in <module>
+#     raise RuntimeError("my message")
+# RuntimeError: my message
