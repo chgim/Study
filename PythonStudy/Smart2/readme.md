@@ -12,3 +12,5 @@
 - python manage.py migrate
 - python manage.py createsuperuser
 - admin / admin@admin.com / admin
+- https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+- https://www.django-rest-framework.org/api-guide/settings/

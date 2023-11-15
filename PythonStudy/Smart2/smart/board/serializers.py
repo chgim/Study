@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-# from .models import Post
+from .models import Post
 
 
 # class PostSerializer(serializers.ModelSerializer):
@@ -10,7 +10,11 @@ from rest_framework import serializers
 #         # fields = ["id", "title"]
 
 class PostSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     title = serializers.CharField()
     content = serializers.CharField()
-    tstamp = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
+
+    def create(self, validated_data):
+        # return Post.objects.create(title=validated_data["title"], content=validated_data["content"])
+        return Post.objects.create(**validated_data)
