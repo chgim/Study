@@ -3,6 +3,7 @@
 - pip install djangorestframework
 - pip install markdown
 - pip install django-filter
+- pip install django-debug-toolbar
 - pip freeze > requirements.txt
 - venv\Scripts\django-admin startproject smart
 - cd smart
@@ -14,3 +15,6 @@
 - admin / admin@admin.com / admin
 - https://docs.djangoproject.com/en/4.2/ref/models/querysets/
 - https://www.django-rest-framework.org/api-guide/settings/
+- https://django-rest-framework-simplejwt.readthedocs.io/en/stable/getting_started.html#installation
+- https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Authorization
+- https://django-debug-toolbar.readthedocs.io/en/latest/

@@ -1,10 +1,101 @@
-from rest_framework import mixins, status, generics
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import mixins, generics
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
 
-from .models import Post
-from .serializers import PostSerializer
+from .models import Post, Comment
+from .serializers import (
+    PostCreateSerializer,
+    PostListSerializer,
+    PostDetailSerializer,
+    CommentCreateSerializer,
+    CommentDetailSerializer,
+    )
 from django.db.models import Q
+
+# 의존성 주입
+# mixins: 다중 상속이 되는 환경에서 핵심 기능을 미리 만들어서 그것을 상속만 받아서 활성화
+
+
+class PostList(
+    mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView
+               ):    
+    # serializer_class = PostSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "post":
+            return PostCreateSerializer
+        
+        return PostListSerializer
+
+    def get_queryset(self):
+        query = self.request.query_params.get("query")
+        posts = Post.objects.prefetch_related("comment_set").defer("content").all().order_by("-id")
+        if query:
+            posts = posts.filter(
+                Q(title__contains=query) | Q(content__contains=query)
+                                 )
+        return posts
+
+    def get(self, request, *args, **kwargs):
+        # print(request.user)
+        # print(request.user.id)
+        # print(request.user.is_authenticated)
+        # if request.user.is_authenticated:
+        return self.list(request, *args, **kwargs)
+        # return Response({"error": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+
+class PostDetail(
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    generics.GenericAPIView
+               ):
+    serializer_class = PostDetailSerializer
+
+    def get_queryset(self):
+        return Post.objects.prefetch_related("comment_set").all()    
+    
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)  
+    
+
+class CommentList(
+    mixins.CreateModelMixin, generics.GenericAPIView
+               ):    
+   
+    def get_serializer_class(self):
+        return CommentCreateSerializer
+      
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+
+class CommentDetail(
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.RetrieveModelMixin,
+    generics.GenericAPIView
+               ):
+    serializer_class = CommentDetailSerializer
+
+    def get_queryset(self):
+        return Comment.objects.all()    
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)  
 
 
 # class PostList(APIView):
@@ -57,22 +148,38 @@ from django.db.models import Q
 #             }) 
 
 
-# 의존성 주입
-# mixins: 다중 상속이 되는 환경에서 핵심 기능을 미리 만들어서 그것을 상속만 받아서 활성화
-class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):    
-    serializer_class = PostSerializer
+# get(self, request, pk=1)
+# class PostDetail(APIView):
+#     def put(self, request, pk, *args, **kwargs):
+#         # print(args, kwargs)
+#         # print(request, ",", pk)
+#         obj = Post.objects.get(pk=pk)
+#         obj.title = request.data.get("title", obj.title)
+#         obj.content = request.data.get("content", obj.content)
+#         obj.save()
+#         ser = PostSerializer(obj)
+#         return Response(ser.data)
 
-    def get_queryset(self):
-        query = self.request.query_params.get("query")
-        posts = Post.objects.all().order_by("-id")
-        if query:
-            posts = posts.filter(
-                Q(title__contains=query) | Q(content__contains=query)
-                                 )
-        return posts
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+#     def delete(self, request, pk, *args, **kwargs):
+#         # print(args, kwargs)
+#         # print(request, ",", pk)
+#         obj = Post.objects.get(pk=pk)
+#         obj.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
     
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+#     def get(self, request, pk, *args, **kwargs):
+#         # print(args, kwargs)
+#         # print(request, ",", pk)
+#         obj = Post.objects.get(pk=pk)
+#         # comments = Comment.objects.filter(post=obj)
+#         # comments = obj.comment_set.all()
+#         # print(dir(obj))
+#         ser = PostSerializer(obj)
+#         return Response(ser.data)
+
+
+# class TestAPI(APIView):
+#     def get(self, request, *args, **kwargs):
+#         obj = Post.objects.prefetch_related("comment_set").all()
+#         ser = PostSerializer(obj, many=True)
+#         return Response(ser.data)
