@@ -29,7 +29,13 @@ class PostList(
 
     def get_queryset(self):
         query = self.request.query_params.get("query")
-        posts = Post.objects.prefetch_related("comment_set").defer("content").all().order_by("-id")
+        posts = (
+            Post.objects.select_related("user")
+            .prefetch_related("comment_set")
+            .defer("content")
+            .all()
+            .order_by("-id")
+        )
         if query:
             posts = posts.filter(
                 Q(title__contains=query) | Q(content__contains=query)

@@ -14,9 +14,20 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 class PostListSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    # user = serializers.SerializerMethodField()
+    # user_id = serializers.IntegerField()
+    user = serializers.CharField()
     title = serializers.CharField()
     comment_count = serializers.SerializerMethodField()
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
+
+    # def get_user(self, obj):
+    #     if obj.user is None:
+    #         return {}
+    #     return {
+    #         "id": obj.user.id,
+    #         "username": obj.user.username
+    #     }
 
     def get_comment_count(self, obj):
         return obj.comment_set.count()
@@ -49,6 +60,7 @@ class PostDetailSerializer(serializers.Serializer):
 
 class PostCreateSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault)
     title = serializers.CharField()
     content = serializers.CharField()
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
@@ -71,6 +83,7 @@ class CommentCreateSerializer(serializers.Serializer):
 
 class CommentDetailSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    user = serializers.CharField()
     content = serializers.CharField()
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
 
