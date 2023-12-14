@@ -16,7 +16,7 @@ class PostListSerializer(serializers.Serializer):   # 타입만 명시 하는게
     id = serializers.IntegerField(read_only=True)
     # user = serializers.SerializerMethodField()
     # user_id = serializers.IntegerField()
-    user = serializers.CharField()  # models.py에서 user=models.ForeignKey...로 설정 되어 있음. user 가져올 때는 객체를 __str__로  문자열로 변환하여 가져옴. User 객체 따라가보면 __str__에서 get_username() 반환. 그래서 user의 이름 가져옴.
+    user = serializers.CharField()  # models.py에서 user=models.ForeignKey...로 설정 되어 있음. user 가져올 때는 객체를 __str__로  문자열로 변환하여 가져옴. User 객체 따라가보면 __str__에서 get_username() 반환. 그래서 user의 이름 가져옴.User->AbstractUser->AbstractBaseUser->get_username()
     title = serializers.CharField()
     comment_count = serializers.SerializerMethodField()
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
@@ -70,7 +70,7 @@ class PostCreateSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField()
     content = serializers.CharField()
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault)  # HiddenField.생성의 결과값으로 주진 않음.default가 키워드 인자 값으로 있어야 함.  : default is a required argument. CurrentUserDefault: context 안의 request 안에있는 user 사용. ['request'].user
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault)  # HiddenField.굳이 user 정보를 생성의 결과값으로 주진 않음.HiddenField는 기본적으로 default가 키워드 인자 값으로 있어야 함.  : default is a required argument. CurrentUserDefault: context 안의 request 안에있는 user 사용. ['request'].user
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
 
     def create(self, validated_data):
@@ -82,7 +82,7 @@ class CommentCreateSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     # post_id = serializers.IntegerField()   
     user = serializers.HiddenField(default=serializers.CurrentUserDefault)
-    post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())  # 예외처리 좋음. 게시글 리스트 쫙 뽑아오기 때문에 입력 범위의 제한을 걸 수 있음.queryset 안에서 데이터를 찾고 없으면 못넣음.
+    post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())  # 예외처리 좋음. 게시글 리스트 전체적으로 뽑아오기 때문에 입력 범위의 제한을 걸 수 있음.queryset 안에서 데이터를 찾고 없으면 못넣음.
     content = serializers.CharField()
     tstamp = serializers.DateTimeField(read_only=True, format="%Y-%m-%d %H:%M:%S")
 

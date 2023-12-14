@@ -23,7 +23,7 @@ class PostList(     # 비즈니스 로직과 직렬화 과정을 분리하여 �
                ):    
     # serializer_class = PostSerializer
 
-    def get_serializer_class(self):     # GenericAPIView -> get_serializer
+    def get_serializer_class(self):     # GenericAPIView -> get_serializer_class
         if self.request.method == "POST":
             return PostCreateSerializer
         

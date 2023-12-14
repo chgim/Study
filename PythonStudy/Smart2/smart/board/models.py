@@ -40,7 +40,7 @@ class Comment(models.Model):
         blank=True,
         verbose_name="사용자",
     )
-    post = models.ForeignKey(
+    post = models.ForeignKey(    # ForeignKey 사용 시 꼭 on_delete 설정
         "board.Post",
         on_delete=models.CASCADE,
         verbose_name="게시글",
