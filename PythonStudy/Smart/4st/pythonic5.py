@@ -9,7 +9,7 @@ class Test:
             return 100
         return self._test_value
 
-    # 값을 할당할 떄 알아서 값과 함께 함수 호출
+    # 값을 할당할 때 알아서 값과 함께 함수 호출
     # 프로퍼티의 Setter는 프로퍼티에 값을 할당할 때 호출되는 메서드입니다. @property 데코레이터로 정의한 프로퍼티에 대응하는 setter는 @프로퍼티이름.setter로 정의됩니다.
     # Setter를 사용하면 값을 설정할 때 추가적인 로직을 수행할 수 있습니다.
     @test_value.setter
